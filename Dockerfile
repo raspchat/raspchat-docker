@@ -35,7 +35,7 @@ ENV RASPCHAT_DIR "~/raspchat"
 
 RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat && cd ~/raspchat && chmod +x get_docker_dependencies.sh && ./get_docker_dependencies.sh
 RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./build_server.sh
-COPY -R static/* ~/raspchat/dist/static/
+COPY static/ ~/raspchat/dist/static
 RUN cd ~/raspchat/dist/ && ./chat-server
 
 # RUN curl -fsSL https://raw.githubusercontent.com/raspchat/raspchat-docker/master/raspchat_d -o raspchat && update-rc.d raspchat defaults
