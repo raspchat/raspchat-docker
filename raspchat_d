@@ -10,20 +10,20 @@
 # 
 ### END INIT INFO
 
-RASPCHAT_DIR=/$USER/raspchat
+RASPCHAT_DIR=/root/raspchat
 
 case "$1" in
  start)
-   su $USER -c $RASPCHAT_DIR/dist/chat-server
+   . /$RASPCHAT_DIR/dist/chat-server
    ;;
  stop)
-   su $USER -c $RASPCHAT_DIR/dist/chat-server
+   . /$RASPCHAT_DIR/dist/chat-server
    sleep 10
    ;;
  restart)
-   su $USER -c $RASPCHAT_DIR/dist/chat-server
+   . /$RASPCHAT_DIR/dist/chat-server
    sleep 20
-   su $USER -c $RASPCHAT_DIR/dist/chat-server
+   . /$RASPCHAT_DIR/dist/chat-server
    ;;
  *)
    echo "Usage: raspchat {start|stop|restart}" >&2
