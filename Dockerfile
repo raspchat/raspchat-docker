@@ -34,7 +34,7 @@ ENV RASPCHAT_REPOSITORY "https://github.com/maxpert/raspchat.git"
 ENV RASPCHAT_DIR "~/raspchat"
 RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat
 COPY get_dependencies.sh ~/raspchat/install.sh
-#RUN cd ~/raspchat && ./get_dependencies.sh
+RUN cd ~/raspchat && ./install.sh
 RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./build_server.sh
 COPY -R static/* ~/raspchat/dist/static/
 RUN cd ~/raspchat/dist/ && ./chat-server
