@@ -31,10 +31,12 @@ COPY go-wrapper /usr/local/bin/
 
 # Set up raspchat
 ENV RASPCHAT_REPOSITORY "https://github.com/maxpert/raspchat.git"
-# ENV DOCKER_BRANCH "docker"
+ENV RASPCHAT_DIR "~/raspchat"
+RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat
 
-# RUN npm install -g bower
-
-RUN cd ~/ && git clone $RASPCHAT_REPOSITORY && cd ~/raspchat && ./get_dependencies.sh && ./compile_assets && cd ~/raspchat/dist/  && ./chat-server
+RUN cd ~/raspchat && ./get_dependencies.sh
+RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./build_server.sh
+COPY -R static/* ~/raspchat/dist/static/
+RUN CD ~/raspchat/dist/ && ./chat-server
 
 # RUN curl -fsSL https://raw.githubusercontent.com/raspchat/raspchat-docker/master/raspchat_d -o raspchat && update-rc.d raspchat defaults
