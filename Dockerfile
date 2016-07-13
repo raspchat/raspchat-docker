@@ -39,3 +39,4 @@ COPY static/ ~/raspchat/dist/static
 #RUN cd ~/raspchat/dist/ && ./chat-server
 
 RUN curl -fsSL https://raw.githubusercontent.com/raspchat/raspchat-docker/master/raspchat_d -o /etc/init.d/raspchat && chmod +x /etc/init.d/raspchat && update-rc.d raspchat defaults
+EXPOSE 80 443 8080
