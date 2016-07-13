@@ -35,7 +35,7 @@ ENV RASPCHAT_DIR "~/raspchat"
 
 RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat
 
-RUN cd ~/raspchat && ./get_docker-dependencies.sh
+RUN ./raspchat/get_docker-dependencies.sh
 RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./build_server.sh
 COPY -R static/* ~/raspchat/dist/static/
 RUN cd ~/raspchat/dist/ && ./chat-server
