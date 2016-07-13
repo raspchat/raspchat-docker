@@ -33,7 +33,7 @@ COPY go-wrapper /usr/local/bin/
 ENV RASPCHAT_REPOSITORY "https://github.com/maxpert/raspchat.git"
 ENV RASPCHAT_DIR "~/raspchat"
 
-RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat && cd raspchat && && ./get_docker_dependencies.sh
+RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat && cd ~/raspchat && ./get_docker_dependencies.sh
 RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./build_server.sh
 COPY -R static/* ~/raspchat/dist/static/
 RUN cd ~/raspchat/dist/ && ./chat-server
