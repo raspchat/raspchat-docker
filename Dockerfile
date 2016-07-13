@@ -34,9 +34,8 @@ ENV RASPCHAT_REPOSITORY "https://github.com/maxpert/raspchat.git"
 ENV RASPCHAT_DIR "~/raspchat"
 
 RUN cd ~/ && git clone $RASPCHAT_REPOSITORY raspchat
-RUN cd ~/raspchat && curl -s https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm > gpm && chmod +x gpm env GOPATH=`pwd` ./gpm get
 
-#RUN cd ~/raspchat && ./get_dependencies.sh
+RUN cd ~/raspchat && ./get_docker-dependencies.sh
 RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./build_server.sh
 COPY -R static/* ~/raspchat/dist/static/
 RUN cd ~/raspchat/dist/ && ./chat-server
