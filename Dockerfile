@@ -38,4 +38,4 @@ RUN cd ~/raspchat && rm -rf dist && mkdir -p dist && mkdir -p dist/static && ./b
 COPY static/ ~/raspchat/dist/static
 #RUN cd ~/raspchat/dist/ && ./chat-server
 
-RUN curl -fsSL https://raw.githubusercontent.com/raspchat/raspchat-docker/master/raspchat_d -o raspchat && update-rc.d raspchat defaults
+RUN curl -fsSL https://raw.githubusercontent.com/raspchat/raspchat-docker/master/raspchat_d -o /etc/init.d/raspchat && update-rc.d raspchat defaults
