@@ -1,15 +1,11 @@
-FROM buildpack-deps:jessie-scm
-MAINTAINER Florian Wartner <hi@florianwartner.co>
+FROM buildpack-deps:wheezy-scm
 
-# Set up dependencies
-RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
+# gcc for cgo
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		g++ \
 		gcc \
 		libc6-dev \
 		make \
-		git \
-		nodejs \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV GOLANG_VERSION 1.6.2
@@ -28,13 +24,3 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 WORKDIR $GOPATH
 
 COPY go-wrapper /usr/local/bin/
-
-# Set up raspchat
-ENV RASPCHAT_REPOSITORY "https://github.com/maxpert/raspchat.git"
-# ENV DOCKER_BRANCH "docker"
-
-# RUN npm install -g bower
-
-RUN cd ~/ && git clone $RASPCHAT_REPOSITORY && cd ~/raspchat && ./get_dependencies.sh && ./compile_assets && cd ~/raspchat/dist/  && ./chat-server
-
-# RUN curl -fsSL https://raw.githubusercontent.com/raspchat/raspchat-docker/master/raspchat_d -o raspchat && update-rc.d raspchat defaults
